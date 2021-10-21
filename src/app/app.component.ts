@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 
+import { Product } from './product.model.ts';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-/*export class AppComponent {
-  title = 'fundamentos-angular';
-}*/
 
 export class AppComponent {
   name = "Luis"; //Si esto fuera privado, no se compartiria al componente y te saldria error
@@ -25,11 +24,12 @@ export class AppComponent {
   //feelings: any[] = ['Anger', 'Happiness', 'Sadness', 'Fear', 'Enjoy']; //No es buena practica
   newFeelings = '';
 
-  products = [
+  products: Product[] = [
     {
       name: 'El juguete',
       price: 200,
-      category: 'all'
+      category: 'all',
+      tag: 'dance'
     },
     {
       name: 'El Poyo',

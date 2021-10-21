@@ -1,3 +1,16 @@
+<h1>*ngFor Object</h1>
+<div>
+  <div *ngFor="let product of products">
+    <p>Name: {{product.name}}</p>
+    <p>Price: {{product.price}}</p>
+    <p>Category: {{product.category}}</p>
+    <hr>
+  </div>
+</div>
+
+<hr>
+
+
 <h1>*ngFor</h1>
 <input type="text" required [(ngModel)]="newFeelings" />
 <button (click)="addNewFeelings()">Add name</button>

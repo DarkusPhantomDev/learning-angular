@@ -385,3 +385,70 @@ Esta seccion se va a enfocar en Estructuras de control, usando `*nglf`. Este es 
   {{ name }}
 </li>
 ```
+
+# 13. Uso del *ngFor
+
+```html
+<li *ngFor="let name of names">
+  {{ name }}
+</li>
+```
+
+El metodo de llamada, funciona igual como lo hacemos en la seccion anterior. Mira este ejemplo:
+
+En el HTML
+
+```html
+<div>
+  <div *ngFor="let product of products">
+    <p>Name: {{product.name}}</p>
+    <p>Price: {{product.price}}</p>
+    <p>Category: {{product.category}}</p>
+    <hr>
+  </div>
+</div>
+```
+
+En la logica
+
+```typescript
+products = [
+    {
+      name: 'El juguete',
+      price: 200,
+      category: 'all'
+    },
+    {
+      name: 'El Poyo',
+      price: 2000,
+      category: 'all'
+    },
+    {
+      name: 'El cookie',
+      price: 20,
+      category: 'all'
+    },
+  ]
+```
+
+Pero hay un problema. Como buena practica, es bueno colocarle tipado a las declaraciones. Pero, ¿Cómo lo hacemos con los objetos? Podriamos intentar tiparlo como `products: string | number`, pero con los objetos no se puede porque tiene multiples tipados. Lo que podemos hacer, es crear un model acerca de ese objeto que queremos tipar.
+
+En este caso, se crea un `product.model.ts` y este seria el tipado
+
+```typescript
+interface Product {
+  name: string;
+  price: number;
+  category: string;
+}
+```
+
+Y si queremos Exportarlo para usarlo en otro componente, podemos hacer esto (o de lo contrario, solo funcionara con ese elemento)
+
+```typescript
+export interface Product {
+  name: string;
+  price: number;
+  category: string;
+}
+```
