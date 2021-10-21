@@ -21,6 +21,28 @@ export class AppComponent {
     avatar: '.'
   }
 
+  feelings: string[] = ['Anger', 'Happiness', 'Sadness', 'Fear', 'Enjoy'];
+  //feelings: any[] = ['Anger', 'Happiness', 'Sadness', 'Fear', 'Enjoy']; //No es buena practica
+  newFeelings = '';
+
+  products = [
+    {
+      name: 'El juguete',
+      price: 200,
+      category: 'all'
+    },
+    {
+      name: 'El Poyo',
+      price: 2000,
+      category: 'all'
+    },
+    {
+      name: 'El cookie',
+      price: 20,
+      category: 'all'
+    },
+  ]
+
   //Metodo
   //En el metodo puedes colocarlo privado o publico
   toggleButton() {
@@ -43,5 +65,13 @@ export class AppComponent {
   onKeyUp (event: Event) {
     const element = event.target as HTMLInputElement;
     this.person.name = element.value;
+  }
+
+  addNewFeelings() {
+    this.feelings.push(this.newFeelings);
+  }
+
+  deleteFeeling(index: number) {
+    this.feelings.splice(index, 1);
   }
 }

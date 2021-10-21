@@ -363,3 +363,25 @@ Esta seccion se va a enfocar en Estructuras de control, usando `*nglf`. Este es 
 	Text to show
 </div>
 ```
+
+```html
+<input type="text" required [(ngModel)]="person.name" />
+<p *ngIf="person.name === 'Dorime'">My content</p>
+<p
+  *ngIf="person.name === 'Carlos' && person.age === 18;
+  elseBlock"
+>
+  My content
+</p>
+<ng-template #elseBlock> <!--Bloque de else-->
+  <p>Bloque de else</p>
+</ng-template>
+```
+
+# 12. Uso del *ngFor
+
+```html
+<li *ngFor="let name of names">
+  {{ name }}
+</li>
+```

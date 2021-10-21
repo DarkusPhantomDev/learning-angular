@@ -1,3 +1,30 @@
+<h1>*ngFor</h1>
+<input type="text" required [(ngModel)]="newFeelings" />
+<button (click)="addNewFeelings()">Add name</button>
+<ul>
+  <li *ngIf="feelings.length === 0">No hay nada que mostrar</li>
+  <li
+    *ngFor="let feeling of feelings
+    "
+  >
+    {{ feeling }}
+  </li>
+</ul>
+
+<ul>
+  <li
+    *ngFor="
+      let feeling of feelings;
+      index as i;
+    "
+  >
+   {{i}} {{ feeling }}
+   <button (click)="deleteFeeling(i)">-</button>
+  </li>
+</ul>
+
+<hr>
+
 <h1>ngIf</h1>
 <input type="text" required [(ngModel)]="person.name" />
 <p *ngIf="person.name === 'Dorime'">My content</p>
