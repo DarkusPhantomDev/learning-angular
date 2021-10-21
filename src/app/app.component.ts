@@ -5,6 +5,12 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+/*export class AppComponent {
   title = 'fundamentos-angular';
+}*/
+
+export class AppComponent {
+  name = "Luis"; //Si esto fuera privado, no se compartiria al componente y te saldria error
+  age = 18; //Publica, se puede compartir en el template
+  img = 'https://source.unsplash.com/random';
 }
