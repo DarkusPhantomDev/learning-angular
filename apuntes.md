@@ -193,3 +193,173 @@ Se recomienda comprender el flujo de datos de la aplicacion y cómo este interac
 
 - Enlace unidireccional [], para enlazar desde la capa logica (component.ts) a la vista (html).
 - Enlace unidreccional (), para enlazar de la vista (html) a la capa logica (component.ts)
+
+
+# Otros eventos que puedes escuchar
+
+Una forma muy comun de manejar eventos, es pasar el "objeto de evento" `$event`, donde se capturan elementos del DOMM. Por lo general, este evento contiene la información que debemos procesar en el método.
+
+Conviene conocer los objetos del evento DOM [Event reference](https://developer.mozilla.org/en-US/docs/Web/Events).
+
+Tambien debes tener en cuenta el contexto de ejecucion.
+
+Las propiedades de un `$event` (objeto) varian segun el tipo de evento DOM. Por ejemplo, un evento de mouse incluye información diferente a la de un evento de edición de cuadro de entrada.
+
+Podemos escuchar el scroll con el siguiente código:
+
+En el html
+
+```html
+<div
+  class="box"
+  (scroll)="onScroll($event)"
+>
+</div>
+```
+
+En la capa logica:
+
+```typescript
+onScroll (event: Event) {
+	const element = event.target as HTMLElement;
+	console.log(element.scrollTop);
+}
+```
+
+Otra cosa que podemos hacer, es leer las teclas que se estan digitando a medida que estas son digitadas. Esto lo hacemos con el siguiente codigo:
+
+En el html
+
+```html
+<input
+  type="text"
+  [value]="person.name"
+  (keyup)="onKeyUp($event)"
+/>
+<p>Name {{ person.name }} </p>
+```
+
+En la capa logica:
+
+```typescript
+onKeyUp (event: Event) {
+	const element = event.target as HTMLInputElement;
+	this.person.name = element.value;
+}
+```
+
+Use un tipo de dato especifico (no any) que pueda revelar las propiedades del objeto asociado al evento:
+
+. Sin informacion de tipo, simplifica el codigo al costo de no saber las propiedades del evento
+
+```typescript
+onK(event: any) {
+	this.values += event.target.value + '|';
+}
+```
+
+. Define un tipo de dato para el evento que estamos capturando, lo que nos permite utilizar las propiedades adecuadas para el objeto
+
+```typescript
+onKey(event: KeyboardEvent) {
+	this.values += (event.target as HTMLInputElement).value + '|';
+}
+```
+
+No todos los elementos tienen una propedad, por lo que se convierte target en un elemento de entrada. El metodo onKey expresa claramente lo que espera y cómo debera interpretar el evento.
+
+
+Tambien puedes capturar teclas como ctr, Alt, Shift y sus combinaciones:
+
+```html
+<input
+  (keyup.control)='...respond to ctrl/control...'
+/>
+
+<input
+  (keyup.alt)='...respond to alt/control...'
+/>
+
+<input
+  (keyup.shift)='...respond to shift/control...'
+/>
+
+<input
+  (keyup.meta)='...respond to command...'
+/>
+
+<input
+  (keyup.control.shift.z)='......'
+/>
+
+<input
+  (keyup.enter)='...respond to enter...'
+/>
+
+<input
+  (keyup.escape)='...respond to escape...'
+/>
+
+<input
+  (keyup.shift.f)='...respond to shift.f...'
+/>
+```
+
+# 10. Data binding con ngModel
+
+Es importante recalcar que para hacer uso de ngModel, debemos importar el "FormModule" y habilitar el mismo en app.module.ts
+
+Archivo app.module.ts
+
+```typescript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { formModule } from '@angular/forms'; //Se añade esto
+
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    formModule //Se añade esto. Importante para que tambien pueda funcionar
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+ngModel realiza un seguimiento de valor y el estado de validacion de un control de formulario individual, debido a las propiedades que hereda de [FormControl](https://angular.io/api/forms/FormControl). Es recomendado saber cómo funciona dicho proceso
+
+Podemos personalizar las validaciones que deberia tener un campo, o el mismo formulario.
+
+Aqui utilizamos las variables de referencia (las que tieenne el signo #) y debemos indicar que la variable debera  tomar el valor del ngModel `<<#nameInput="ngModel>>"`. No se pueden repetir los valores de `#nameElement`
+
+Se pueden realizar las validaciones que normlamente encontramos en HTML y con "pattern". Podemos especificar una comprobacion como expresion regular
+
+Podemos tener un flujo de datos unidireccional con [] o bidireccional con [()]
+
+Acepta inputs y son realmente utiles para estos, gracias a que siempre esta pendiente de los estados. Por ejemplo, para ver si es valido o no, la interacion que tiene el usuario con ese input y sincroniza el valor.
+
+Cuando se utiliza el ngModel, sin la etiqueta `<form>`, es necesario proporcionar un "nombre de atributo", de manera que el control pueda ser registrado en el formulario padre bajo ese nombre
+
+Comportamiento del ngModel sin etiqueta `<form>`
+
+```html
+
+```
+
+# 11. Uso de *nglf
+Esta seccion se va a enfocar en Estructuras de control, usando `*nglf`. Este es un ejemplo de condicional
+
+```html
+<div *ngIf="show">
+	Text to show
+</div>
+```
