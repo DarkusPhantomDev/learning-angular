@@ -82,7 +82,9 @@ constructor(public age: number, public lastName: string){}
 ```
 
 # 6. String interpolation
-Es la forma, desde la logica en este caso nuestro typescript, en que podemos pasar datos para renderizar nuestro template. Ademas, es como nosotros, con nuestros `{{}}`, vamos a implementar nuestras expresion dentro de ellas y obtener un resultado. Ejemplo:
+Es la forma, desde la logica y en este caso nuestro typescript, en que podemos pasar datos para renderizar nuestro template. 
+
+Ademas, es como nosotros, con nuestros `{{}}`, vamos a implementar nuestras expresion dentro de ellas y obtener un resultado. Ejemplo:
 
 - `{{ 1 + 1}}`
 
@@ -90,3 +92,69 @@ Es la forma, desde la logica en este caso nuestro typescript, en que podemos pas
 
 - `{{ myFunction }}`
 
+Los datos que vienen en la logica (los archivos ts) se puede plasmar en el template (html).
+Ejemplo:
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root', //Aca seleciona el componente
+  templateUrl: './app.component.html', //Aca selecciona la ruta para el template (html)
+  styleUrls: ['./app.component.scss'] //aca seleciona los archivos para los estilos
+})
+
+export class AppComponent {
+  name = "Luis"; //Si esto fuera privado, no se compartiria al componente y te saldria error
+  age = 18; //Publica, se puede compartir en el template
+  img = 'https://source.unsplash.com/random';
+}
+
+```
+
+```html
+<h1>Hola mundo</h1>
+<h2>{{ 'Hola mundo'.repeat(5)}} </h2>
+<p> 3 + 3 = {{ 3 + 3 }} </p>
+<h3>Hola, soy {{ name }} y tengo {{ age }} </h3>
+<img src={{img}} alt="Imagen">
+```
+
+# Property Binding
+
+Es una forma de controlar dinamicamente algunos atributos de HTML, para que estos puedan ser rendereizados a partir de un string, variable o atributo de un objeto de la capa lógica.
+
+El caso es que, solo funcionan en una direccion desde la capa logica (component.ts) al objeto destino (atributo html). Esto es conocido como flujos de datos.
+
+Debemos vincular los valores del componente a los atributos HTML. Esto se logra encerrando el atributo HTML entre los "[]" (square breakers).
+
+Los corchetes, [], hacen que angular evalue al lado derecho de la asignación como una expresión dinamica.
+
+Sin los corchetes, angular trata al lado dreche como un literal de cadena y establece la propiedad de ese valor estatico.
+
+```html
+<button disabled="false"></button> //Dato fijo como string
+<button [disabled="btnDisabled"]></button> //Dato dinamico
+```
+
+A menudo, la interpolacion y Property Binding pueden lograr los mismos resultados. Lo siguientes pares de enlace hacen lo mismo.
+
+```html
+<p> //Interpolation
+  <img src="{{itemImageUrl}}">
+  is the <i>interpolated</i> image.
+</p>
+
+<p> //Property Binding
+  <img [src]="itemImageUrl">
+  is the <i>interpolated</i> image.
+</p>
+```
+
+Utilice cualquiera de las dos formas cuando represente valores de datos como cadenas. Aunque, es prefrible el metodo de interpolacion para facilitar la lectura
+
+Al establecer una propiedad de elemento en un valor de datos, que no sea una cadena, debe usar "Property Binding"
+
+Se recomienda comprender los "Event binding" para entender el flujo de datos de la aplicacion, y como este interactua con "interpolation" y "Property Binding".
+
+Nota: Aplica progress, un elemento reciente de HTML, para mostrar barra de progreso
