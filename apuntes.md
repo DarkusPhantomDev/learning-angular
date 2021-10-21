@@ -158,3 +158,38 @@ Al establecer una propiedad de elemento en un valor de datos, que no sea una cad
 Se recomienda comprender los "Event binding" para entender el flujo de datos de la aplicacion, y como este interactua con "interpolation" y "Property Binding".
 
 Nota: Aplica progress, un elemento reciente de HTML, para mostrar barra de progreso
+
+# 8.  Event Binding
+
+El event binding le permite escuchar y responder a las acciones del usuario, como pulsaciones de teclas, movimeintos del mouse, clics y toques (Atritubtos HTML y propiedades del DOM).
+
+Para vincular un elemento HTML a un evento, debemos indicar el nombre del evento entre parentesis a la izquierda de un signo igual, y el nombre de la funcion entre comillas a la derecha. Recuerda indicar que se trata de una fincion con los parentesis "nameFunction()". Ejemplo:
+
+<button (click)="onSave()">Save</button>
+
+Usar `()` en el template HTML es sinonimo de llamar "addEventListener".
+
+Podemos realizar eventos personalizados con "EventEmitter" y tambien llamar multiples eventos de la siguiente forma:
+
+```html
+<button
+  (click)="clickEvent()"
+  (mouseenter)="mouseEnterEvent()"
+>
+  Click Me
+</button>
+
+```
+
+Además, determinar un objetivo de evento
+
+```html
+<button (click)="handleClick($event)">
+  Save
+</button>
+```
+
+Se recomienda comprender el flujo de datos de la aplicacion y cómo este interactua con la misma. Existe tres tipos de enlaces:
+
+- Enlace unidireccional [], para enlazar desde la capa logica (component.ts) a la vista (html).
+- Enlace unidreccional (), para enlazar de la vista (html) a la capa logica (component.ts)

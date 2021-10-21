@@ -18,6 +18,20 @@ export class AppComponent {
   person = {
     name: "Nicolas",
     age: 18,
-    avatar: '.';
+    avatar: '.'
+  }
+
+  //Metodo
+  //En el metodo puedes colocarlo privado o publico
+  toggleButton() {
+    this.btnDisabled = !this.btnDisabled;
+  }
+
+  showAlert() {
+    alert("Haz activado la alarma");
+  }
+
+  incrementAge() {
+    this.person.age += 1;
   }
 }
