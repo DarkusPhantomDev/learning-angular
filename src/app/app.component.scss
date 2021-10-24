@@ -1,6 +1,16 @@
 .box {
-	height: 200px;
 	width: 200px;
+	height: 100px;
 	overflow: auto;
 	background: red;
+}
+
+.message-error {
+	background: red;
+	color: #fff;
+	opacity: 0;
+	transition: all linear .5s;
+	&.invalid {
+		opacity: 1;
+	}
 }

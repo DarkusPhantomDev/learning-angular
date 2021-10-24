@@ -1,3 +1,14 @@
+<h1>Class and Style</h1>
+<input type="text" required #nameInput2="ngModel" [(ngModel)]="person.name" />
+<p
+  class="message-error"
+  [class.invalid]="nameInput2.invalid"
+>
+  El campo es requerido
+</p>
+
+<hr>
+
 <h1>*ngFor Object</h1>
 <div>
   <div *ngFor="let product of products">

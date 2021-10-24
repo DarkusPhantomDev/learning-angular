@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Product } from './product.model.ts';
+//import { Product } from './product.model.ts';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,8 @@ export class AppComponent {
   //feelings: any[] = ['Anger', 'Happiness', 'Sadness', 'Fear', 'Enjoy']; //No es buena practica
   newFeelings = '';
 
-  products: Product[] = [
+//  products: Product[] = [
+    products = [
     {
       name: 'El juguete',
       price: 200,
